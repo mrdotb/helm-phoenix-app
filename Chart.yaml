@@ -1,0 +1,23 @@
+apiVersion: v2
+name: phoenix-app
+description: A Helm chart for Kubernetes
+version: 0.1.0
+description: |
+  A helm chart for running a Phoenix web application.
+type: application
+maintainers:
+  - name: mrdotb
+    email: mrdotb@protonmail.com
+sources:
+  - https://github.com/mrdotb/helm-charts
+kubeVersion: ">=1.16.0-0"
+home: https://github.com/mrdotb/helm-charts
+keywords:
+  - elixir
+  - phoenix
+annotations:
+  "artifacthub.io/links": |
+    - name: Chart Source
+      url: https://github.com/mrdotb/helm-charts
+
+appVersion: "1.16.0"
