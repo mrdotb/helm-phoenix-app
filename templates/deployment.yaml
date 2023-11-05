@@ -38,7 +38,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - secretRef:
-              name: {{ include "elixir-phoenix.secretName" . }}
+                name: {{ include "phoenix-app.secretName" . }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

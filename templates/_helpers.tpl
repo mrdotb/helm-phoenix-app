@@ -64,10 +64,10 @@ Create the name of the service account to use
 {{/*
 Define the name of the secret to use
 */}}
-{{- define "elixir-phoenix.secretName" -}}
+{{- define "phoenix-app.secretName" -}}
 {{- if .Values.secret.existingSecret -}}
 {{- .Values.secret.existingSecret -}}
 {{- else -}}
-{{- template "elixir-phoenix.fullname" . -}}
+{{- template "phoenix-app.fullname" . -}}
 {{- end -}}
 {{- end -}}

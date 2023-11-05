@@ -14,6 +14,10 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+secret:
+  create: true
+  existingSecret: ""
+
 migration:
   enabled: true
   command: [""]

@@ -1,10 +1,10 @@
 apiVersion: v2
 name: phoenix-app
-description: A Helm chart for Kubernetes
 version: 0.1.0
 description: |
   A helm chart for running a Phoenix web application.
 type: application
+icon: https://raw.githubusercontent.com/mrdotb/i/master/phoenix-icon.png
 maintainers:
   - name: mrdotb
     email: mrdotb@protonmail.com
