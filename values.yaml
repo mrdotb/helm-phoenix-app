@@ -14,10 +14,15 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+environment:
+  {}
+  # Otherwise you can pass a secret name which contains the env
+
 secret:
   create: true
   existingSecret: ""
 
+# How to run the migration in the container
 migration:
   enabled: true
   command: [""]

@@ -36,6 +36,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PHX_PORT
+              value: {{ .Values.service.port | quote }}
           envFrom:
             - secretRef:
                 name: {{ include "phoenix-app.secretName" . }}
@@ -46,10 +49,12 @@ spec:
           livenessProbe:
             httpGet:
               path: /
+              containerPort: {{ .Values.service.port }}
               port: http
           readinessProbe:
             httpGet:
               path: /
+              containerPort: {{ .Values.service.port }}
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
