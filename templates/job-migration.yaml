@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: Always
           envFrom:
             - secretRef:
-                name: {{ include "phoenix-app.fullname" . }}
+                name: {{ include "phoenix-app.secretName" . }}
           {{- with .Values.migration.command }}
           command:
             {{- toYaml . | nindent 12 }}

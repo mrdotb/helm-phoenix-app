@@ -25,7 +25,7 @@ secret:
 # How to run the migration in the container
 migration:
   enabled: true
-  command: [""]
+  command: ["/app/bin/migrate"]
   args: [""]
 
 serviceAccount:
