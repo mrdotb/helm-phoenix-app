@@ -19,7 +19,7 @@ spec:
       {{- end }}
       labels:
         {{- include "phoenix-app.labels" . | nindent 8 }}
-	{{- with .Values.podLabels }}
+  {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
@@ -37,6 +37,16 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: K8_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: K8_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8_SELECTOR
+              value: {{ include "phoenix-app.selector" . }}
             - name: PHX_PORT
               value: {{ .Values.service.port | quote }}
           envFrom:

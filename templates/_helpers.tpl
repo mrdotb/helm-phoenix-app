@@ -71,3 +71,10 @@ Define the name of the secret to use
 {{- template "phoenix-app.fullname" . -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Define selector
+*/}}
+{{- define "phoenix-app.selector" -}}
+release={{ include "phoenix-app.name" . }}
+{{- end}}
