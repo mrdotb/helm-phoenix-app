@@ -47,8 +47,12 @@ spec:
                   fieldPath: metadata.namespace
             - name: K8_SELECTOR
               value: {{ include "phoenix-app.selector" . }}
-            - name: PHX_PORT
-              value: {{ .Values.service.port | quote }}
+            {{- if .Values.extraEnv }}
+            {{- range .Values.extraEnv }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ include "phoenix-app.secretName" . }}
@@ -58,12 +62,12 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.service.healthcheck }}
               containerPort: {{ .Values.service.port }}
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.service.healthcheck }}
               containerPort: {{ .Values.service.port }}
               port: http
           resources:

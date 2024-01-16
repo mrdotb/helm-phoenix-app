@@ -14,7 +14,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-environment:
+extraEnv:
   {}
   # Otherwise you can pass a secret name which contains the env
 
@@ -56,6 +56,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  healthcheck: "/"
 
 ingress:
   enabled: false
