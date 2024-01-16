@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "phoenix-app.fullname" . }}-{{ .Release.Revision }}
+  name: {{ include "phoenix-app.fullname" . }}-migration-{{ .Release.Revision }}
   labels:
     {{- include "phoenix-app.labels" . | nindent 4 }}
 spec:
@@ -29,6 +29,23 @@ spec:
         - name: {{ include "phoenix-app.fullname" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: Always
+          env:
+            - name: K8_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: K8_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8_SELECTOR
+              value: {{ include "phoenix-app.selector" . }}
+            {{- if .Values.extraEnv }}
+            {{- range .Values.extraEnv }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
+            {{- end }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: {{ include "phoenix-app.secretName" . }}
