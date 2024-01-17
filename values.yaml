@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+app: phoenix-app
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent

@@ -37,6 +37,7 @@ Common labels
 helm.sh/chart: {{ include "phoenix-app.chart" . }}
 {{ include "phoenix-app.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
+app: {{ .Values.app }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -76,5 +77,5 @@ Define the name of the secret to use
 Define selector
 */}}
 {{- define "phoenix-app.selector" -}}
-release={{ include "phoenix-app.name" . }}
+app={{ .Values.app }}
 {{- end}}
