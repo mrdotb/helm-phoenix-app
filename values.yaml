@@ -43,7 +43,7 @@ serviceAccount:
 
 rbac:
   create: true
-  resources: ["pods", "services"]  # List the resources you want to grant access to
+  resources: ["pods", "services", "endpoints"]  # List the resources you want to grant access to
   verbs: ["list"]
 
 podAnnotations: {}
