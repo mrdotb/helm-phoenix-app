@@ -41,6 +41,11 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+rbac:
+  create: true
+  resources: ["pods", "services"]  # List the resources you want to grant access to
+  verbs: ["list"]
+
 podAnnotations: {}
 podLabels: {}
 

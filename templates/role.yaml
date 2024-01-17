@@ -1,0 +1,25 @@
+{{- if .Values.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "phoenix-app.fullname" . }}-role
+  labels:
+    {{- include "phoenix-app.labels" . | nindent 4 }}
+rules:
+- apiGroups: [""]
+  resources:
+    {{- if .Values.rbac.resources }}
+    {{- toYaml .Values.rbac.resources | nindent 4 }}
+    {{- else }}
+    - pods
+    - services
+    {{- end }}
+  verbs:
+    {{- if .Values.rbac.verbs }}
+    {{- toYaml .Values.rbac.verbs | nindent 4 }}
+    {{- else }}
+    - get
+    - list
+    - watch
+    {{- end }}
+{{- end }}
